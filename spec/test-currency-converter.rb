@@ -19,21 +19,31 @@ class CurrencyConverterTest < MiniTest::Test
     assert_equal(rate, currency_converter1.rate)
   end
 
-  # def test_currency_converter_method_works
-  #   rate = {USA: 1.0, GBP: 20.0}
-  #   currency_converter1 = CurrencyConverter.new(rate)
-  #   assert(currency_converter1.converter(USA: 1.0, GBP))
-  # end
-
   def test_currency_converter_convertes
     currency = Currency.new(10.0, :USA)
     code = :GBP
-    rate = {USA: 10.0, GBP: 20.0}
+    rate = {USA: 1.0, GBP: 2.0}
     currency_converter1 = CurrencyConverter.new(rate)
     assert(currency_converter1.converter(currency, code))
   end
 
   def test_currency_converter_three
+    test_currency = Currency.new(300, :JPY)
+    code = :USD
+    rate = {USD: 1.0, GBP: 2.0, JPY:120 }
+    currency_converter1 = CurrencyConverter.new(rate)
+    yen_to_usd = currency_converter1.converter(test_currency, code)
+    assert_equal(2.5, yen_to_usd)
+  end
+
+  def test_unknown_currency_converter_error
+    test_currency = Currency.new(300, :INR)
+    code = :USD
+    rate = {USD: 1.0, GBP: 2.0, JPY:120 }
+    currency_converter1 = CurrencyConverter.new(rate)
+    yen_to_usd = currency_converter1.converter(test_currency, code)
+    assert_equal(2.5, yen_to_usd)
+    assert_raises UnknownCurrencyCodeError
   end
 
 end

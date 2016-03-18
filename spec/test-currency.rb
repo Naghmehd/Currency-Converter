@@ -77,5 +77,7 @@ class CurrencyTest < MiniTest::Test
     assert_equal(currency6, currency5 * 0.69)
   end
 
+  
+
 
 end
