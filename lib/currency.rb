@@ -6,7 +6,7 @@
   end
 
 class Currency
-  attr_reader :amount, :code
+  attr_reader :amount, :code :symbol
 
   def initialize(amount, code)
     @amount = amount
@@ -37,6 +37,6 @@ class Currency
       rounded_amount = self.amount * number
       Currency.new(rounded_amount.round(2), self.code)
     end
- 
+
 
 end
